@@ -10,6 +10,7 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 // import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Shared/Footer/Footer';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/blogs' element={<Blogs></Blogs>} />
         <Route path='/signin' element={<SignIn></SignIn>} />
         <Route path='/signup' element={<SignUp></SignUp>} />
+        <Route path='*' element={<NotFound></NotFound>} />
       </Routes>
       <Footer></Footer>
     </div>
