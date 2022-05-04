@@ -44,7 +44,6 @@ const SignIn = () => {
 
     const resetPass = async () => {
         const ResetPassEmail = ResetPassRef.current.value;
-        console.log(ResetPassEmail);
         if (ResetPassEmail === '') {
             toast.error("Please give email");
         }

@@ -10,7 +10,6 @@ const RequireAuth = ({ children }) => {
     const [user, loading] = useAuthState(auth);
     const location = useLocation();
     const [sendEmailVerification, sending] = useSendEmailVerification(auth);
-    console.log(user)
     const sendVerification = async () => {
         await sendEmailVerification(user.email);
         toast.error("Email Sent")
