@@ -8,7 +8,7 @@ import About from './components/About/About';
 import Blogs from './components/Blogs/Blogs';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
-// import RequireAuth from './components/RequireAuth/RequireAuth';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 import Footer from './components/Shared/Footer/Footer';
 import NotFound from './components/NotFound/NotFound';
 
@@ -19,8 +19,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/inventory' element={<Inventory></Inventory>} />
-        <Route path='/inventory/:id' element={<InventoryItem></InventoryItem>} />
+        <Route path='/inventory' element={<RequireAuth><Inventory></Inventory></RequireAuth>} />
+        <Route path='/inventory/:id' element={<RequireAuth><InventoryItem></InventoryItem></RequireAuth>}/>
         <Route path='/about' element={<About></About>} />
         <Route path='/blogs' element={<Blogs></Blogs>} />
         <Route path='/signin' element={<SignIn></SignIn>} />

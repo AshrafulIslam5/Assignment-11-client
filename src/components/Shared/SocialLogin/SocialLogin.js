@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import google from '../../../Logos/google.png';
 import github from '../../../Logos/github.png';
 import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
@@ -10,8 +10,11 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
     const [signInWithGithub, userGit, loadingGit, errorGit] = useSignInWithGithub(auth);
+    const location = useLocation();
+    let from = location.state?.from?.pathname || '/';
+    
     if (userGoogle || userGit) {
-        navigate('/')
+        navigate(from, { replace: true });
     }
     if (loadingGit || loadingGoogle) {
         return <Spinner></Spinner>;

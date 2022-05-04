@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+html{
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Poppins', sans-serif;
+}
+/* for home page */
+.gradient{
+    background: linear-gradient(60deg, red, blue);
 }

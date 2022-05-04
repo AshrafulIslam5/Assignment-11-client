@@ -1,8 +1,8 @@
 .banner{
-    background-image: url('../../Logos/banner.jpg');
+    background-image: url('../../../Logos/banner.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.715);
     background-blend-mode: overlay;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 60px);
 }
