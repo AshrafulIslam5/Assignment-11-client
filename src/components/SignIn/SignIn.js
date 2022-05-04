@@ -45,10 +45,15 @@ const SignIn = () => {
     const resetPass = async () => {
         const ResetPassEmail = ResetPassRef.current.value;
         console.log(ResetPassEmail);
-        await sendPasswordResetEmail(ResetPassEmail);
-        toast.error("Email Sent", {
-            icon: false
-        });
+        if (ResetPassEmail === '') {
+            toast.error("Please give email");
+        }
+        else {
+            await sendPasswordResetEmail(ResetPassEmail);
+            toast.error("Email Sent", {
+                icon: false
+            });
+        }
     }
     return (
         <div>
