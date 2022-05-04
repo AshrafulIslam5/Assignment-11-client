@@ -1,0 +1,9 @@
+.addon {
+    position: relative;
+}
+.addon svg {
+    position: absolute;
+    left: 0px;
+    pointer-events: none;
+    top: 1rem;
+}

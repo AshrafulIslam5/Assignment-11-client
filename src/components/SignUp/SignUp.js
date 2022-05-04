@@ -5,6 +5,8 @@ import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Spinner from '../Shared/Spinner/Spinner';
+import { UserCircleIcon, MailIcon, LockClosedIcon } from '@heroicons/react/outline';
+import './SignUp.css';
 
 const SignUp = () => {
     const nameRef = useRef('');
@@ -46,10 +48,11 @@ const SignUp = () => {
                 <form onSubmit={submit} className="mt-8 space-y-6 " action="#" method="POST">
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div>
-                        <div className='mb-5'>
+                        <div className='mb-5 relative'>
                             <label htmlFor="name" className="text-red-500">
                                 Name
                             </label>
+                            <UserCircleIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
                             <input
                                 ref={nameRef}
                                 id="email-address"
@@ -57,14 +60,15 @@ const SignUp = () => {
                                 type="text"
                                 autoComplete="text"
                                 required
-                                className="appearance-none rounded-2xl relative block w-full px-3 py-2  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-10 mt-2 sm:text-sm"
+                                className="appearance-none rounded-2xl relative block w-full px-3 md:pl-20  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                 placeholder="Your Name"
                             />
                         </div>
-                        <div className='mb-5'>
+                        <div className='mb-5 relative'>
                             <label htmlFor="email-address" className="text-red-500">
                                 Email address
                             </label>
+                            <MailIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
                             <input
                                 ref={emailRef}
                                 id="email-address"
@@ -72,14 +76,15 @@ const SignUp = () => {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-2xl relative block w-full px-3 py-2  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-10 mt-2 sm:text-sm"
+                                className="z-0 appearance-none rounded-2xl relative block w-full px-3 md:pl-20 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                 placeholder="Email address"
                             />
                         </div>
-                        <div>
+                        <div className='relative'>
                             <label htmlFor="password" className="text-red-500">
                                 Password
                             </label>
+                            <LockClosedIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
                             <input
                                 ref={passRef}
                                 id="password"
@@ -87,7 +92,7 @@ const SignUp = () => {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-2xl relative block w-full px-3 py-2  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-10 mt-2 sm:text-sm"
+                                className="appearance-none rounded-2xl relative block w-full px-3 md:pl-20  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                 placeholder="Password"
                             />
                         </div>
