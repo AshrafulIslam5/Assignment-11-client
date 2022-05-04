@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../Logos/logo.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Spinner from '../Shared/Spinner/Spinner';
 
@@ -13,16 +13,17 @@ const SignUp = () => {
     const navigate = useNavigate();
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
+    const [sendEmailVerification, sending, VerificationError] = useSendEmailVerification(auth);
 
     if (user) {
         navigate('/');
     }
 
-    if (loading) {
+    if (loading || sending) {
         return <Spinner></Spinner>
     }
     let errorMsg;
-    if (error) {
+    if (error || VerificationError) {
         errorMsg = <p className='text-red-500 text-lg'>{error?.message}</p>
     }
     const submit = async e => {
@@ -32,6 +33,7 @@ const SignUp = () => {
         const password = passRef.current.value;
 
         await createUserWithEmailAndPassword(email, password);
+        await sendEmailVerification(email);
         await updateProfile({ displayName: name });
     }
     return (

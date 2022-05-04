@@ -5,7 +5,7 @@ import auth from '../../firebase.init';
 import logo from '../../Logos/logo.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 import Spinner from '../Shared/Spinner/Spinner';
-import { toast, ToastContainer} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
@@ -51,7 +51,6 @@ const SignIn = () => {
     }
     return (
         <div>
-            <ToastContainer  />
             <div className='flex flex-col items-center mt-8'>
                 <img className='w-32' src={logo} alt="" />
                 <h3 className='text-3xl mt-2'>Sign in to your account</h3>

@@ -11,7 +11,7 @@ import profilePhoto from '../../../Logos/user.png';
 import { signOut } from 'firebase/auth';
 import HeaderSpinner from './HeaderSpinner';
 
-// ---------- Used Tailwind's Way of making navbar ----------------//
+// ---------- Used Tailwind's Way of making navbar (From: TailWind UI) ----------------//
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
