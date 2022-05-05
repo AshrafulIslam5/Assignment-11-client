@@ -10,10 +10,12 @@ const Inventory = () => {
             .then(response => response.json())
             .then(data => setBrands(data))
     }, []);
-console.log(brands)
-    if (brands === []) {
-    return <Spinner></Spinner>
-}
+    if (brands.length === 0) {
+        return <>
+            <h2 className='mx-auto font-semibold text-center text-3xl w-1/2 border-4 border-red-600 border-t-0 border-x-0 pb-5 my-10'>Our Brands</h2>
+            <Spinner></Spinner>
+        </>
+    }
     return (
         <div>
             <h2 className='mx-auto font-semibold text-center text-3xl w-1/2 border-4 border-red-600 border-t-0 border-x-0 pb-5 my-10'>Our Brands</h2>
