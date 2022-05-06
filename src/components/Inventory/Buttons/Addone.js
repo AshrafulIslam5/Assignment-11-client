@@ -1,13 +1,9 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 
-const Deliver = ({ quantity, id }) => {
+
+const Addone = ({ quantity, id }) => {
     const setQuan = () => {
-        if (quantity === 0) {
-            toast.error('Out Of Stock');
-        }
-        else {
-            const addOrRemove = quantity - 1;
+            const addOrRemove = quantity + 1;
             const newOneQuan = { addOrRemove };
 
             const url = `https://ashrafuls-assignment-11.herokuapp.com/laptops/${id}`
@@ -15,20 +11,20 @@ const Deliver = ({ quantity, id }) => {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
-                },  
+                },
                 body: JSON.stringify(newOneQuan)
             })
                 .then(res => res.json())
                 .then(data => {
                     window.location.reload()
                 })
-        }
+        
     }
     return (
-        <button onClick={setQuan} className='mt-2 mr-3 text-white bg-teal-500 px-3 py-1 rounded-lg hover:bg-teal-800'>Deliver One</button>
+        <button onClick={setQuan} className='mt-2 mr-3 text-white bg-amber-500 px-3 py-1 rounded-lg hover:bg-amber-800'>Add One</button>
         
 
     );
 };
 
-export default Deliver;
+export default Addone;

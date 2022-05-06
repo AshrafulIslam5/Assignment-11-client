@@ -9,14 +9,14 @@ const Delivered = ({ quantity, id }) => {
 
     const amountRef = useRef('');
     const setQuan = () => {
-        const amount = amountRef.current.value;
+        const amount = parseInt(amountRef.current.value);
         if (amount <= 0) {
             toast.error('please give a valid number');
         } else if (amount > quantity) {
             toast.error("you don't have much in quantity");
         } else {
-            const quanAfterSub = quantity - amount;
-            const newQuan = { quanAfterSub };
+            const addOrRemove = quantity - amount;
+            const newQuan = { addOrRemove };
             
             const url = `https://ashrafuls-assignment-11.herokuapp.com/laptops/${id}`
             fetch(url, {

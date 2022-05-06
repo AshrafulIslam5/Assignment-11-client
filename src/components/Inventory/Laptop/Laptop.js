@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Spinner from '../../Shared/Spinner/Spinner';
 import Add from '../Buttons/Add';
+import Addone from '../Buttons/Addone';
 import Deliver from '../Buttons/Deliver';
 import Delivered from '../Buttons/Delivered';
 
@@ -36,7 +37,7 @@ const Laptop = () => {
                     <button className='mt-2 mr-3 text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-800'>Details</button>
                     <Deliver quantity={quantity} id={_id}></Deliver>
                     <Delivered quantity={quantity} id={_id} key={_id}></Delivered>
-                    <button className='mt-2 mr-3 text-white bg-amber-500 px-3 py-1 rounded-lg hover:bg-amber-800'>Add One</button>
+                    <Addone quantity={quantity} id={_id}></Addone>
                     <Add quantity={quantity} id={_id}></Add>
                     <button className='mt-2 mr-3 text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
                 </div>

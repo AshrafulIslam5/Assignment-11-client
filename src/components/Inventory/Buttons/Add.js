@@ -14,8 +14,8 @@ const Add = ({ quantity, id }) => {
             toast.error('please give a valid number');
         }
         else {
-            const quanAfterSub = quantity + amount;
-            const newQuan = { quanAfterSub };
+            const addOrRemove = quantity + amount;
+            const newQuan = { addOrRemove };
             
             const url = `https://ashrafuls-assignment-11.herokuapp.com/laptops/${id}`
             fetch(url, {
@@ -33,7 +33,7 @@ const Add = ({ quantity, id }) => {
     }
     return (
         <>
-            <button onClick={() => setOpen(true)} className='mt-2 mr-3 text-white bg-yellow-400 px-3 py-1 rounded-lg hover:bg-yellow-700'>Add Many</button>
+            <button onClick={() => setOpen(true)} className='mt-2 mr-3 text-white bg-yellow-400 px-3 py-1 rounded-lg hover:bg-yellow-800'>Add Many</button>
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
                     <Transition.Child
