@@ -5,29 +5,28 @@ import Spinner from '../../Shared/Spinner/Spinner';
 import Product from './Product';
 
 const Products = () => {
-    const [brands, setBrands] = useState([]);
+    const [products, setProducts] = useState([]);
     useEffect(() => {
         const url = 'https://ashrafuls-assignment-11.herokuapp.com/laptops'
         fetch(url)
             .then(res => res.json())
-            .then(data => setBrands(data));
+            .then(data => setProducts(data));
     }, []);
 
-    if (brands.length === 0) {
+    if (products.length === 0) {
         return <>
             <h2 id='s' className='font-semibold text-2xl text-center py-9 text-white mt-36 mb-24 gradient'>Our Company are now only limited to <span className='text-fuchsia-200 font-bold underline'> Razer, Samsung, Acer, Asus, Hp and Lenovo</span></h2>
             <h2 className='mx-auto font-semibold text-center text-3xl w-1/2 border-4 border-red-600 border-t-0 border-x-0 pb-5'>Few Of Our Products</h2>
             <Spinner></Spinner>
         </>
     }
-    const products = brands.map(brand => brand.Products[Math.floor(Math.random() * 5)]);
     return (
         <div>
             <h2 id='s' className='font-semibold text-2xl text-center py-9 text-white mt-36 mb-24 gradient'>Our Company are now only limited to <span className='text-fuchsia-200 font-bold underline'> Razer, Samsung, Acer, Asus, Hp and Lenovo</span></h2>
             <h2 className='mx-auto font-semibold text-center text-3xl w-1/2 border-4 border-red-600 border-t-0 border-x-0 pb-5'>Few Of Our Products</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-14 px-6 md:px-20'>
                 {
-                    products.map(product => <Product key={product.key} product={product}></Product>)
+                    products?.slice(0, 6).map(product => <Product key={product.key} product={product}></Product>)
 
                 }
             </div>

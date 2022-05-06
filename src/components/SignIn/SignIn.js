@@ -160,7 +160,7 @@ const SignIn = () => {
                                                     </Dialog.Title>
 
                                                     <div className="p-6">
-                                                        <label className='text-red-500 mb-2' htmlFor='email'>Email</label>
+                                                        <label className='text-red-500 mb-2 ml-2' htmlFor='email'>Email</label>
                                                         <input className="mx-auto appearance-none rounded-2xl block  border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 mt-2 sm:text-sm" type="email" placeholder='Your Email Address' ref={ResetPassRef} required />
                                                     </div>
                                                 </div>
