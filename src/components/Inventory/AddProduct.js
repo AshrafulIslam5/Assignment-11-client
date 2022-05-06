@@ -1,19 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import logo from '../../Logos/logo.png'
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
     const [user] = useAuthState(auth);
-    const submit = async e => {
+    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm();
+    const submit = data => {
+        const url = 'https://ashrafuls-assignment-11.herokuapp.com/laptops';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result =>
+                navigate('/inventory'),
+                toast.error("laptop added!!")
+            )
+    };
 
-    }
     return (
         <div>
             <div className='rounded-md shadow-sm w-3/4 sm:w-2/4 mt-5 p-6 mx-auto bg-slate-50 -space-y-px'>
                 <h2 className='text-center text-xl font-semibold flex justify-center items-center gap-5'><img className='w-16' src={logo} alt="" />Please Fill this form to add your Product</h2>
-                <form onSubmit={submit} className="mt-8 space-y-6 " action="#" method="POST">
+                <form onSubmit={handleSubmit(submit)} className="mt-8 space-y-6 " action="#" method="POST">
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div>
                         <div className='mb-5 relative'>
@@ -22,10 +39,13 @@ const AddProduct = () => {
                             </label>
                             <input
                                 // ref={emailRef}
+                                {...register("email")}
                                 id="email-address"
                                 name="email"
                                 type="email"
-                                autoComplete="email"
+                                autoComplete="off"
+                                value={user.email}
+                                readOnly
                                 required
                                 className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                 placeholder="Email address"
@@ -38,9 +58,11 @@ const AddProduct = () => {
                                 </label>
                                 <input
                                     // ref={emailRef}
-                                    name="Product-Name"
+                                    {...register("name")}
+                                    name="name"
                                     type="text"
                                     required
+                                    autoComplete="off"
                                     className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                     placeholder="Product Name"
                                 />
@@ -51,9 +73,11 @@ const AddProduct = () => {
                                 </label>
                                 <input
                                     // ref={emailRef}
-                                    name="Supplier-Name"
+                                    {...register("supplierName")}
+                                    name="supplierName"
                                     type="text"
-                                    required
+                                    value={user.displayName}
+                                    readOnly
                                     className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                     placeholder="Supplier-Name"
                                 />
@@ -61,7 +85,7 @@ const AddProduct = () => {
                         </div>
                         <div>
                             <h2 className='text-red-500 font-semibold'>Description</h2>
-                            <textarea className='sm:w-72 lg:w-96' rows="3"></textarea>
+                            <textarea {...register("description")} className='sm:w-72 lg:w-96' rows="3"></textarea>
                             <div className='flex flex-col sm:flex-row'>
                                 <div className='mb-5 w-full mr-2'>
                                     <label htmlFor="Image" className="text-red-500">
@@ -69,9 +93,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Image"
+                                        {...register("img")}
+                                        name="img"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Image"
                                     />
@@ -82,9 +108,13 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Quantity"
+                                        {...register("quantity", {
+                                            valueAsNumber: true
+                                        })}
+                                        name="quantity"
                                         type="number"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Quantity"
                                     />
@@ -95,9 +125,13 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Price"
+                                        {...register("price", {
+                                            valueAsNumber: true
+                                        })}
+                                        name="price"
                                         type="number"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Price"
                                     />
@@ -111,9 +145,11 @@ const AddProduct = () => {
                                 </label>
                                 <input
                                     // ref={emailRef}
-                                    name="Processor"
+                                    {...register("specification.processor")}
+                                    name="specification.processor"
                                     type="text"
                                     required
+                                    autoComplete="off"
                                     className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                     placeholder="Processor"
                                 />
@@ -125,9 +161,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Display"
+                                        {...register("specification.display")}
+                                        name="specification.display"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Display"
                                     />
@@ -138,9 +176,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Ram"
+                                        {...register("specification.ram")}
+                                        name="specification.ram"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Ram"
                                     />
@@ -151,9 +191,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Storage"
+                                        {...register("specification.storage")}
+                                        name="specification.storage"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Storage"
                                     />
@@ -164,9 +206,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Graphics"
+                                        {...register("specification.graphics")}
+                                        name="specification.graphics"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Graphics"
                                     />
@@ -177,9 +221,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Operating System"
+                                        {...register("specification.operatingSystem")}
+                                        name="specification.operatingSystem"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Operating System"
                                     />
@@ -190,9 +236,11 @@ const AddProduct = () => {
                                     </label>
                                     <input
                                         // ref={emailRef}
-                                        name="Battery"
+                                        {...register("specification.Battery")}
+                                        name="specification.Battery"
                                         type="text"
                                         required
+                                        autoComplete="off"
                                         className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
                                         placeholder="Battery"
                                     />
@@ -204,7 +252,7 @@ const AddProduct = () => {
                                     type="submit"
                                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-5"
                                 >
-                                    Sign in
+                                    Add
                                 </button>
                             </div>
                         </div>

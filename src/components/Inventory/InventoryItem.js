@@ -32,8 +32,8 @@ const InventoryItem = ({ product }) => {
                 </div>
             </div>
             <div className='flex flex-col lg:flex-row'>
-                <button onClick={handleUpdate} className='text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-800 mr-3'>Update</button>
-                <button onClick={() => deleteProduct(_id)} className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
+                <button onClick={handleUpdate} className='text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-800 sm:mr-3 mt-2 sm:mt-0'>Update</button>
+                <button onClick={() => deleteProduct(_id)} className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800 mt-2 sm:mt-0'>Delete</button>
             </div>
         </div>
     );
