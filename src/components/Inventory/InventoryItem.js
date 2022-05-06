@@ -7,6 +7,19 @@ const InventoryItem = ({ product }) => {
     const handleUpdate = () => {
         navigate(`/inventory/${_id}`)
     }
+
+    const deleteProduct = id => {
+        const yes = window.confirm('Are you sure?');
+        if (yes) {
+            const url = `https://ashrafuls-assignment-11.herokuapp.com/laptops/${_id}`;
+            fetch(url, { method: 'DELETE' })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.reload()
+                })
+
+        }
+    }
     return (
         <div className='sm:flex flex-col sm:flex-row justify-between items-center border-2 border-red-500 rounded-lg p-6 mb-5'>
             <div className='flex flex-col sm:flex-row justify-start items-center text-center sm:text-left'>
@@ -20,7 +33,7 @@ const InventoryItem = ({ product }) => {
             </div>
             <div className='flex flex-col lg:flex-row'>
                 <button onClick={handleUpdate} className='text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-800 mr-3'>Update</button>
-                <button className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
+                <button onClick={() => deleteProduct(_id)} className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
             </div>
         </div>
     );

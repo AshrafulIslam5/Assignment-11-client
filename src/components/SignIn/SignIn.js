@@ -121,6 +121,8 @@ const SignIn = () => {
                         </div>
                     </div>
                 </form>
+
+                
                 {/* Using Modal From Tailwind */}
                 <Transition.Root show={open} as={Fragment}>
                     <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
