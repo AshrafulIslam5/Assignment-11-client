@@ -18,7 +18,10 @@ const InventoryItem = ({ product }) => {
                     <h2><strong>Supplier: </strong>{supplierName}</h2>
                 </div>
             </div>
-            <button onClick={handleUpdate} className='text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800 m-0 sm:mt-5'>Update</button>
+            <div className='flex flex-col lg:flex-row'>
+                <button onClick={handleUpdate} className='text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-800 mr-3'>Update</button>
+                <button className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
+            </div>
         </div>
     );
 };

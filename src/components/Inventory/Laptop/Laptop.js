@@ -6,6 +6,7 @@ import Add from '../Buttons/Add';
 import Addone from '../Buttons/Addone';
 import Deliver from '../Buttons/Deliver';
 import Delivered from '../Buttons/Delivered';
+import Details from '../Buttons/Details';
 
 const Laptop = () => {
     const { id } = useParams();
@@ -34,15 +35,14 @@ const Laptop = () => {
                     </div>
                 </div>
                 <div className='flex flex-col lg:flex-row'>
-                    <button className='mt-2 mr-3 text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-800'>Details</button>
+                    <Details laptop={laptop}></Details>
                     <Deliver quantity={quantity} id={_id}></Deliver>
                     <Delivered quantity={quantity} id={_id} key={_id}></Delivered>
                     <Addone quantity={quantity} id={_id}></Addone>
                     <Add quantity={quantity} id={_id}></Add>
-                    <button className='mt-2 mr-3 text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
                 </div>
             </div>
-            <Link to={'/inventory'}><button className='mt-8 hover:bg-red-800 bg-red-500 text-white flex justify-center items-center w-48 text-2xl mx-auto'><ArrowLeftIcon className='w-3/12 mr-3'></ArrowLeftIcon> Go back</button></Link>
+            <Link to={'/inventory'}><button className='mt-8 hover:bg-red-800 bg-red-500 text-white flex justify-center items-center px-3 py-1  text-2xl mx-auto'><ArrowLeftIcon className='w-10 mr-3'></ArrowLeftIcon> Go To Inventory</button></Link>
         </div>
     );
 };
