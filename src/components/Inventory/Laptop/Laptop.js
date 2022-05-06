@@ -1,8 +1,9 @@
 import { ArrowLeftIcon } from '@heroicons/react/outline';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Spinner from '../../Shared/Spinner/Spinner';
 import Add from '../Buttons/Add';
+import Deliver from '../Buttons/Deliver';
 import Delivered from '../Buttons/Delivered';
 
 const Laptop = () => {
@@ -33,12 +34,14 @@ const Laptop = () => {
                 </div>
                 <div className='flex flex-col lg:flex-row'>
                     <button className='mt-2 mr-3 text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-800'>Details</button>
+                    <Deliver quantity={quantity} id={_id}></Deliver>
                     <Delivered quantity={quantity} id={_id} key={_id}></Delivered>
+                    <button className='mt-2 mr-3 text-white bg-amber-500 px-3 py-1 rounded-lg hover:bg-amber-800'>Add One</button>
                     <Add quantity={quantity} id={_id}></Add>
                     <button className='mt-2 mr-3 text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800'>Delete</button>
                 </div>
             </div>
-            <button className='mt-8 hover:bg-red-800 bg-red-500 text-white flex justify-center items-center w-48 text-2xl mx-auto'><ArrowLeftIcon className='w-3/12 mr-3'></ArrowLeftIcon> Go back</button>
+            <Link to={'/inventory'}><button className='mt-8 hover:bg-red-800 bg-red-500 text-white flex justify-center items-center w-48 text-2xl mx-auto'><ArrowLeftIcon className='w-3/12 mr-3'></ArrowLeftIcon> Go back</button></Link>
         </div>
     );
 };

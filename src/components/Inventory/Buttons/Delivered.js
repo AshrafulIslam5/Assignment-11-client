@@ -34,7 +34,7 @@ const Delivered = ({ quantity, id }) => {
     }
     return (
         <>
-            <button onClick={() => setOpen(true)} className='mt-2 mr-3 text-white bg-green-500 px-3 py-1 rounded-lg hover:bg-green-800'>Delivered</button>
+            <button onClick={() => setOpen(true)} className='mt-2 mr-3 text-white bg-green-500 px-3 py-1 rounded-lg hover:bg-green-800'>Deliver Many</button>
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>
                     <Transition.Child
