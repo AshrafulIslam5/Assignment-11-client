@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -14,6 +14,12 @@ const SignIn = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false)
     // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    })
     const cancelButtonRef = useRef(null)
     const emailRef = useRef('');
     const passRef = useRef('');
@@ -24,10 +30,6 @@ const SignIn = () => {
     let from = location.state?.from?.pathname || '/';
     // for pass reset
     const [sendPasswordResetEmail, sending, ResetError] = useSendPasswordResetEmail(auth);
-
-    if (user) {
-        navigate(from, { replace: true });
-    }
 
     if (loading || sending) {
         return <Spinner></Spinner>
@@ -122,7 +124,7 @@ const SignIn = () => {
                     </div>
                 </form>
 
-                
+
                 {/* Using Modal From Tailwind */}
                 <Transition.Root show={open} as={Fragment}>
                     <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={() => setOpen(false)}>

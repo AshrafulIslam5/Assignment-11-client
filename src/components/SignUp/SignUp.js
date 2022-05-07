@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../Logos/logo.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
@@ -6,7 +6,6 @@ import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateP
 import auth from '../../firebase.init';
 import Spinner from '../Shared/Spinner/Spinner';
 import { UserCircleIcon, MailIcon, LockClosedIcon } from '@heroicons/react/outline';
-import './SignUp.css';
 
 const SignUp = () => {
     const nameRef = useRef('');
@@ -17,9 +16,11 @@ const SignUp = () => {
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification, sending, VerificationError] = useSendEmailVerification(auth);
 
-    if (user) {
-        navigate('/');
-    }
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    })
 
     if (loading || sending) {
         return <Spinner></Spinner>
@@ -52,10 +53,9 @@ const SignUp = () => {
                             <label htmlFor="name" className="text-red-500">
                                 Name
                             </label>
-                            <UserCircleIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
+                            <UserCircleIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600' />
                             <input
                                 ref={nameRef}
-                                id="email-address"
                                 name="name"
                                 type="text"
                                 autoComplete="text"
@@ -68,7 +68,7 @@ const SignUp = () => {
                             <label htmlFor="email-address" className="text-red-500">
                                 Email address
                             </label>
-                            <MailIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
+                            <MailIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600' />
                             <input
                                 ref={emailRef}
                                 id="email-address"
@@ -84,7 +84,7 @@ const SignUp = () => {
                             <label htmlFor="password" className="text-red-500">
                                 Password
                             </label>
-                            <LockClosedIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600'/>
+                            <LockClosedIcon className='pointer-events-none w-12 h-8 absolute top-1/2 transform -translate-y-1/2 z-10 left-3 mt-4  border-y-0 border-l-0 border-r-2  border-red-600 hidden md:block text-red-600' />
                             <input
                                 ref={passRef}
                                 id="password"

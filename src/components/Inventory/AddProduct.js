@@ -5,25 +5,26 @@ import logo from '../../Logos/logo.png'
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AddProduct = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const submit = data => {
-        const url = 'https://ashrafuls-assignment-11.herokuapp.com/laptops';
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        
+        // used axios because my raw method was not working
+        // adding it to myItems
+        axios.post('https://ashrafuls-assignment-11.herokuapp.com/myItems', data)
+
+        // adding to inventory
+        axios.post('https://ashrafuls-assignment-11.herokuapp.com/laptops', data)
+            .then(response => {
+                if (response.data.insertedId) {
+                    navigate('/inventory')
+                toast.error('Laptop added')
+            }
         })
-            .then(res => res.json())
-            .then(result =>
-                navigate('/inventory'),
-                toast.error("laptop added!!")
-            )
     };
 
     return (
@@ -85,23 +86,23 @@ const AddProduct = () => {
                         </div>
                         <div>
                             <h2 className='text-red-500 font-semibold'>Description</h2>
-                            <textarea {...register("description")} className='sm:w-72 lg:w-96' rows="3"></textarea>
+                            <textarea {...register("description")} className='sm:w-72 lg:w-96 text-sm' rows="3"></textarea>
+                            <div className='mb-5 w-full mr-2'>
+                                <label htmlFor="Image" className="text-red-500">
+                                    Image
+                                </label>
+                                <input
+                                    // ref={emailRef}
+                                    {...register("img")}
+                                    name="img"
+                                    type="text"
+                                    required
+                                    autoComplete="off"
+                                    className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
+                                    placeholder="Image"
+                                />
+                            </div>
                             <div className='flex flex-col sm:flex-row'>
-                                <div className='mb-5 w-full mr-2'>
-                                    <label htmlFor="Image" className="text-red-500">
-                                        Image
-                                    </label>
-                                    <input
-                                        // ref={emailRef}
-                                        {...register("img")}
-                                        name="img"
-                                        type="text"
-                                        required
-                                        autoComplete="off"
-                                        className="z-0 appearance-none rounded-2xl relative block w-full border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500 border-2 focus:z-0 mt-2 sm:text-sm"
-                                        placeholder="Image"
-                                    />
-                                </div>
                                 <div className='mb-5 w-full mr-2'>
                                     <label htmlFor="Quantity" className="text-red-500">
                                         Quantity
