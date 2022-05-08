@@ -48,11 +48,11 @@ const Details = ({ laptop }) => {
 
                                                 <div className="p-6 flex flex-col lg:flex-row">
                                                     <div className='flex flex-col justify-center items-center'>
-                                                        <img className='w-2/4 sm:w-1/4 lg:w-3/4' src={img} alt="" />
+                                                        <img className='w-2/4 sm:w-1/4 lg:w-3/4 mb-4' src={img} alt="" />
                                                         <h2 className='text-xl text-center text-red-500 mb-4 font-semibold'>{name}</h2>
                                                         <div className='text-center mb-5 lg:text-left lg:mb-0'>
                                                             <h2 className='text-xl'><strong>Product Id: </strong>{_id}</h2>
-                                                            <h2 className='text-xl'><strong>Price: </strong>{price}</h2>
+                                                            <h2 className='text-xl'><strong>Price: </strong>{price}$</h2>
                                                             <h2 className='text-xl'><strong>Quantity: </strong>{quantity}</h2>
                                                             <h2 className='text-xl'><strong>Supplier Name: </strong>{supplierName}</h2>
                                                         </div>

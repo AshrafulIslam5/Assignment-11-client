@@ -21,9 +21,9 @@ const ManageItems = () => {
         <div>
             <h2 className='mx-auto font-semibold text-center text-3xl w-1/2 border-4 border-red-600 border-t-0 border-x-0 pb-5 my-10'>All Laptops</h2>
             <div className='px-5 sm:px-20'>
-            {
-                products.map(product => <ManageItem key={product._id} product={product}></ManageItem>)
-            }
+                {
+                    products.map(product => <ManageItem key={product._id} product={product}></ManageItem>)
+                }
             </div>
         </div>
     );

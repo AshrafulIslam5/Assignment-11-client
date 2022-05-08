@@ -1,28 +1,25 @@
 import axios from 'axios';
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import auth from '../../firebase.init';
 
-const ManageItem = ({ product }) => {
-    const [user] = useAuthState(auth)
+const MyItem = ({ product }) => {
     const { name, _id, quantity, supplierName, img } = product;
-    const navigate = useNavigate();
-    const handleUpdate = () => {
-        navigate(`/manageitems/${_id}`)
-    }
 
-    const deleteProduct = async () => {
+    const deleteFromMyItems = async () => {
+        const url = `https://ashrafuls-assignment-11.herokuapp.com/myItems/${name}`;
         const ok = window.confirm('Are you sure?');
         if (ok) {
-            axios.delete(`https://ashrafuls-assignment-11.herokuapp.com/laptops/${_id}`)
-                .then(res => {
-                    window.location.reload()
-                    toast.error("item deleted")
+            await axios.delete(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
+                .then(res => {
+                    toast.error(`Deleted, Please reload the page and check your inventory and delete *${name}*`)
+                })
         }
     }
+
     return (
         <div>
             <div className='sm:flex flex-col sm:flex-row justify-between items-center border-2 border-red-500 rounded-lg p-6 mb-5'>
@@ -36,12 +33,11 @@ const ManageItem = ({ product }) => {
                     </div>
                 </div>
                 <div className='flex flex-col lg:flex-row'>
-                    <button onClick={handleUpdate} className='text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-800 sm:mr-3 mt-2 sm:mt-0'>Update</button>
-                    <button onClick={deleteProduct} className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800 mt-2 sm:mt-0'>Delete</button>
+                    <button onClick={deleteFromMyItems} className=' text-white bg-red-500 px-3 py-1 rounded-lg hover:bg-red-800 mt-2 sm:mt-0'>Delete</button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ManageItem;
+export default MyItem;

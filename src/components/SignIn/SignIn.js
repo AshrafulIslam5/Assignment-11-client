@@ -9,17 +9,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MailIcon, LockClosedIcon } from '@heroicons/react/outline';
 import { Dialog, Transition } from '@headlessui/react'
+import axios from 'axios';
 
 const SignIn = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [open, setOpen] = useState(false)
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
-    useEffect(() => {
-        if (user) {
-            navigate(from, { replace: true });
-        }
-    })
     const cancelButtonRef = useRef(null)
     const emailRef = useRef('');
     const passRef = useRef('');
@@ -44,6 +40,9 @@ const SignIn = () => {
         const email = emailRef.current.value;
         const password = passRef.current.value;
         await signInWithEmailAndPassword(email, password);
+        navigate(from, { replace: true });
+        const { data } = await axios.post('https://ashrafuls-assignment-11.herokuapp.com/getToken', { email })
+        localStorage.setItem('accessToken', data.accessToken)
     }
 
 

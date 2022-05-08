@@ -12,7 +12,7 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const submit = data => {
-        
+
         // used axios because my raw method was not working
         // adding it to myItems
         axios.post('https://ashrafuls-assignment-11.herokuapp.com/myItems', data)
@@ -22,9 +22,9 @@ const AddProduct = () => {
             .then(response => {
                 if (response.data.insertedId) {
                     navigate('/inventory')
-                toast.error('Laptop added')
-            }
-        })
+                    toast.error('Laptop added')
+                }
+            })
     };
 
     return (

@@ -48,3 +48,11 @@ const UpdateItem = () => {
 };
 
 export default UpdateItem;
+
+// {
+//     if (data) {
+//         setLaptop(data)
+//     } else {
+//
+//     }
+// }
