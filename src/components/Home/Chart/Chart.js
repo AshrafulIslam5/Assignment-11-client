@@ -4,7 +4,7 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 
 const Chart = () => {
 
-    // I am sorry for using this hardcoded data but i don't have much time
+    // I am sorry for using this hardcoded data but i didn't have much time
     const data = [
         {
             month: 'March',
@@ -38,12 +38,12 @@ const Chart = () => {
         },
     ]
     return (
-        <div className='flex flex-col md:flex-row justify-center items-center'>
+        <div className='flex flex-col md:flex-row justify-center items-center md:px-10 lg:px-0'>
             <div className='text-center md:text-left flex flex-col mt-12 md:mt-0 md:px-0 px-5 md:mr-32'>
                 <h2 className='text-4xl mb-4'>Our sales by now</h2>
                 <h1 className='text-lg'>Our sales are getting Larger day by day which is amazing </h1>
                 <footer className='text-sm mt-7 text-gray-500'>Restock or deliver more!!</footer>
-                <Link to={'/inventory'}><button className='bg-red-500 text-lg px-3 py-1 rounded-lg mt-3'>Update Inventory</button></Link>
+                <Link to={'/inventory'}><button className='bg-red-500 text-white text-lg px-3 py-1 rounded-lg mt-3'>Update Inventory</button></Link>
             </div>
             <div>
                 <h2 className='text-center text-3xl mt-20 mb-5'>Our Success By now</h2>

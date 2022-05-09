@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import google from '../../../Logos/google.png';
 import github from '../../../Logos/github.png';
-import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import Spinner from '../Spinner/Spinner';
+import axios from 'axios';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
@@ -12,12 +13,8 @@ const SocialLogin = () => {
     const [signInWithGithub, userGit, loadingGit, errorGit] = useSignInWithGithub(auth);
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
-
-    useEffect(() => {
-        if (userGoogle || userGit) {
-            navigate(from, { replace: true });
-        }
-    })
+    const [user] = useAuthState(auth);
+    
     if (loadingGit || loadingGoogle) {
         return <Spinner></Spinner>;
     }
@@ -27,6 +24,23 @@ const SocialLogin = () => {
         GitErrorMsg = <p className='text-red-500 text-lg'>{errorGit?.message}</p>
         GoogleErrorMsg = <p className='text-red-500 text-lg'>{errorGoogle?.message}</p>
     }
+    
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle();
+        const email = user?.email;
+        const { data } = await axios.post('https://ashrafuls-assignment-11.herokuapp.com/getToken', { email })
+        localStorage.setItem('accessToken', data.accessToken)
+        navigate(from, { replace: true });
+    }
+    const handleGithubSignIn = async () => {
+        await signInWithGithub();
+        const email = user?.email;
+        const { data } = await axios.post('https://ashrafuls-assignment-11.herokuapp.com/getToken', { email })
+        localStorage.setItem('accessToken', data.accessToken)
+        navigate(from, { replace: true });
+    }
+
+
     return (
         <div>
             <div className='mt-8 flex items-center'>
@@ -37,8 +51,8 @@ const SocialLogin = () => {
             {GitErrorMsg}
             {GoogleErrorMsg}
             <div className='flex flex-col md:flex-row justify-center gap-5 mt-4'>
-                <button onClick={() => signInWithGoogle()} className='bg-white rounded-lg px-14 border hover:border-red-500'><img className='w-14 mx-auto' src={google} alt="" /></button>
-                <button onClick={() => signInWithGithub()} className='bg-white rounded-lg px-14 border hover:border-red-500'><img className='w-12 mx-auto' src={github} alt="" /></button>
+                <button onClick={handleGoogleSignIn} className='bg-white rounded-lg px-14 border hover:border-red-500'><img className='w-14 mx-auto' src={google} alt="" /></button>
+                <button onClick={handleGithubSignIn} className='bg-white rounded-lg px-14 border hover:border-red-500'><img className='w-12 mx-auto' src={github} alt="" /></button>
             </div>
         </div>
     );

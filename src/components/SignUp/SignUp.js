@@ -6,6 +6,7 @@ import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateP
 import auth from '../../firebase.init';
 import Spinner from '../Shared/Spinner/Spinner';
 import { UserCircleIcon, MailIcon, LockClosedIcon } from '@heroicons/react/outline';
+import axios from 'axios';
 
 const SignUp = () => {
     const nameRef = useRef('');
@@ -16,11 +17,6 @@ const SignUp = () => {
     const [updateProfile] = useUpdateProfile(auth);
     const [sendEmailVerification, sending, VerificationError] = useSendEmailVerification(auth);
 
-    useEffect(() => {
-        if (user) {
-            navigate('/');
-        }
-    })
 
     if (loading || sending) {
         return <Spinner></Spinner>
@@ -38,6 +34,9 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(email, password);
         await sendEmailVerification(email);
         await updateProfile({ displayName: name });
+        const { data } = await axios.post('https://ashrafuls-assignment-11.herokuapp.com/getToken', { email })
+        localStorage.setItem('accessToken', data.accessToken)
+        navigate('/');
     }
     return (
         <div>

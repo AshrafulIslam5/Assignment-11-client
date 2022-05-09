@@ -6,7 +6,7 @@ const MyItem = ({ product }) => {
     const { name, _id, quantity, supplierName, img } = product;
 
     const deleteFromMyItems = async () => {
-        const url = `https://ashrafuls-assignment-11.herokuapp.com/myItems/${name}`;
+        const url = `https://ashrafuls-assignment-11.herokuapp.com/myItems/${_id}`;
         const ok = window.confirm('Are you sure?');
         if (ok) {
             await axios.delete(url, {

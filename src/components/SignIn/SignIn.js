@@ -40,9 +40,9 @@ const SignIn = () => {
         const email = emailRef.current.value;
         const password = passRef.current.value;
         await signInWithEmailAndPassword(email, password);
-        navigate(from, { replace: true });
         const { data } = await axios.post('https://ashrafuls-assignment-11.herokuapp.com/getToken', { email })
         localStorage.setItem('accessToken', data.accessToken)
+        navigate(from, { replace: true });
     }
 
 
